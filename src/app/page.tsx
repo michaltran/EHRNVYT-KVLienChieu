@@ -6,10 +6,12 @@ export default async function Home() {
   if (!s) redirect('/login');
 
   switch (s.role) {
-    case 'ADMIN':     redirect('/admin');
-    case 'DOCTOR':    redirect('/doctor');
-    case 'CONCLUDER': redirect('/conclude');
-    case 'DEPT_REP':  redirect('/dept');
-    default:          redirect('/me');
+    case 'ADMIN':                redirect('/admin');
+    case 'DOCTOR':               redirect('/doctor');
+    case 'CONCLUDER':            redirect('/conclude');
+    case 'DEPT_REP':             redirect('/dept');
+    case 'KTV_XETNGHIEM':        redirect('/paraclinical');
+    case 'KTV_CHANDOANHINHANH':  redirect('/paraclinical');
+    default:                     redirect('/me');
   }
 }

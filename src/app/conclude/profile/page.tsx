@@ -6,10 +6,13 @@ export default async function ConcluderProfilePage() {
   const user = await getCurrentUser();
   return (
     <DoctorProfileClient
-      fullName={user?.fullName ?? ''}
-      email={user?.email ?? ''}
-      jobTitle={user?.jobTitle ?? ''}
-      savedSignature={user?.signatureDataUrl ?? null}
-    />
+  fullName={user?.fullName ?? ''}
+  email={user?.email ?? ''}
+  jobTitle={user?.jobTitle ?? ''}
+  savedSignature={null}
+  caUserId={user?.caUserId ?? ''}
+  caSerialNumber={user?.caSerialNumber ?? ''}
+  caEnabled={user?.caEnabled ?? false}
+/>
   );
 }

@@ -15,6 +15,8 @@ enum Role {
   CONCLUDER
   DEPT_REP
   EMPLOYEE
+  KTV_XETNGHIEM
+  KTV_CHANDOANHINHANH
 }
 
 enum Gender {

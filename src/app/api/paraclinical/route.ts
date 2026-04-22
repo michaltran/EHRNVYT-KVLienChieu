@@ -18,7 +18,7 @@ const MAX_SIZE = 10 * 1024 * 1024;
  */
 export async function POST(req: Request) {
   try {
-    await requireAuth(['DOCTOR', 'ADMIN']);
+    const session = await requireAuth(['DOCTOR', 'ADMIN', 'KTV_XETNGHIEM', 'KTV_CHANDOANHINHANH']);
 
     const formData = await req.formData();
     const recordId = formData.get('recordId') as string;
@@ -31,6 +31,20 @@ export async function POST(req: Request) {
 
     if (!recordId || !category) {
       return NextResponse.json({ error: 'Thiếu recordId hoặc category' }, { status: 400 });
+    }
+
+    // Validate: KTV chỉ được nhập hạng mục thuộc chuyên môn của mình
+    const XN = ['Công thức máu', 'Sinh hoá', 'Miễn dịch'];
+    const CDHA = ['Điện tim', 'X-quang', 'Siêu âm'];
+    if (session.role === 'KTV_XETNGHIEM' && !XN.includes(category)) {
+      return NextResponse.json({
+        error: `KTV Xét nghiệm không được nhập hạng mục "${category}". Liên hệ KTV Chẩn đoán hình ảnh.`,
+      }, { status: 403 });
+    }
+    if (session.role === 'KTV_CHANDOANHINHANH' && !CDHA.includes(category)) {
+      return NextResponse.json({
+        error: `KTV CĐHA không được nhập hạng mục "${category}". Liên hệ KTV Xét nghiệm.`,
+      }, { status: 403 });
     }
 
     let fileUrl: string | null = null;
@@ -77,10 +91,26 @@ export async function POST(req: Request) {
 
 export async function DELETE(req: Request) {
   try {
-    await requireAuth(['DOCTOR', 'ADMIN']);
+    const session = await requireAuth(['DOCTOR', 'ADMIN', 'KTV_XETNGHIEM', 'KTV_CHANDOANHINHANH']);
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
     if (!id) return NextResponse.json({ error: 'Thiếu id' }, { status: 400 });
+
+    // KTV chỉ được xóa mục thuộc chuyên môn của mình
+    if (session.role === 'KTV_XETNGHIEM' || session.role === 'KTV_CHANDOANHINHANH') {
+      const existing = await prisma.paraclinical.findUnique({ where: { id } });
+      if (!existing) return NextResponse.json({ error: 'Không tìm thấy' }, { status: 404 });
+
+      const XN = ['Công thức máu', 'Sinh hoá', 'Miễn dịch'];
+      const CDHA = ['Điện tim', 'X-quang', 'Siêu âm'];
+      if (session.role === 'KTV_XETNGHIEM' && !XN.includes(existing.category)) {
+        return NextResponse.json({ error: 'Không có quyền xóa hạng mục này' }, { status: 403 });
+      }
+      if (session.role === 'KTV_CHANDOANHINHANH' && !CDHA.includes(existing.category)) {
+        return NextResponse.json({ error: 'Không có quyền xóa hạng mục này' }, { status: 403 });
+      }
+    }
+
     await prisma.paraclinical.delete({ where: { id } });
     return NextResponse.json({ ok: true });
   } catch (e: any) {

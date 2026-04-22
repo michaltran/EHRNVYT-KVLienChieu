@@ -49,7 +49,18 @@ export const ROLE_LABELS: Record<Role, string> = {
   CONCLUDER: 'Bác sĩ kết luận',
   DEPT_REP: 'Đại diện khoa',
   EMPLOYEE: 'Nhân viên',
+  KTV_XETNGHIEM: 'KTV Xét nghiệm',
+  KTV_CHANDOANHINHANH: 'KTV Chẩn đoán hình ảnh',
 };
+
+// Phân công hạng mục cận lâm sàng theo role
+export const XETNGHIEM_CATEGORIES = ['Công thức máu', 'Sinh hoá', 'Miễn dịch'];
+export const CHANDOANHINHANH_CATEGORIES = ['Điện tim', 'X-quang', 'Siêu âm'];
+export const ALL_PARACLINICAL_CATEGORIES = [
+  ...XETNGHIEM_CATEGORIES,
+  ...CHANDOANHINHANH_CATEGORIES,
+  'Khác',
+];
 
 export function calcBmi(heightCm?: number | null, weightKg?: number | null) {
   if (!heightCm || !weightKg) return null;

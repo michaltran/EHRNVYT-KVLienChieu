@@ -77,6 +77,8 @@ export default function UsersClient({ users, departments }: { users: U[]; depart
                 <option value="ADMIN">Quản trị viên</option>
                 <option value="DOCTOR">Bác sĩ khám</option>
                 <option value="CONCLUDER">Bác sĩ kết luận</option>
+                <option value="KTV_XETNGHIEM">KTV Xét nghiệm (Công thức máu, Sinh hoá, Miễn dịch)</option>
+                <option value="KTV_CHANDOANHINHANH">KTV Chẩn đoán hình ảnh (Điện tim, X-quang, Siêu âm)</option>
                 <option value="DEPT_REP">Đại diện khoa</option>
                 <option value="EMPLOYEE">Nhân viên</option>
               </select>

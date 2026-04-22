@@ -7,6 +7,8 @@ export async function POST() {
     const adminPass = await hashPassword('admin123');
     const doctorPass = await hashPassword('doctor123');
     const concludePass = await hashPassword('conclude123');
+    const xnPass = await hashPassword('xn123');
+    const cdhaPass = await hashPassword('cdha123');
 
     const accounts = [
       { email: 'admin@lienchieu.vn', pass: adminPass, name: 'Quản trị viên hệ thống', role: 'ADMIN' as const, specs: null, title: null },
@@ -23,6 +25,10 @@ export async function POST() {
         specs: ['TAI_MUI_HONG'], title: 'BS - Khoa TMH' },
       { email: 'bs.rhm@lienchieu.vn', pass: doctorPass, name: 'BS. Răng-Hàm-Mặt', role: 'DOCTOR' as const,
         specs: ['RANG_HAM_MAT'], title: 'BS - Khoa RHM' },
+      { email: 'ktv.xn@lienchieu.vn', pass: xnPass, name: 'KTV. Xét nghiệm', role: 'KTV_XETNGHIEM' as const,
+        specs: null, title: 'KTV - Khoa Xét nghiệm' },
+      { email: 'ktv.cdha@lienchieu.vn', pass: cdhaPass, name: 'KTV. Chẩn đoán hình ảnh', role: 'KTV_CHANDOANHINHANH' as const,
+        specs: null, title: 'KTV - Khoa CĐHA' },
     ];
 
     let created = 0;

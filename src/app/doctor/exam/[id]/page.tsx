@@ -60,10 +60,7 @@ export default async function DoctorExamPage({ params }: { params: { id: string 
         mySpecialties={mySpecialties}
         savedSignature={doctor.signatureDataUrl}
         userTitle={doctor.jobTitle}
-<<<<<<< HEAD
         caEnabled={doctor.caEnabled}
-=======
->>>>>>> 3b0854366f1320539a1e9c8fd92a81fead14f1ba
       />
       <div className="mt-4">
         <ParaclinicalPanel
