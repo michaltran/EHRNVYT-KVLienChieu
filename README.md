@@ -110,7 +110,8 @@ Sau khi deploy xong, truy cập `https://<app>.vercel.app/setup` → bấm **"Ch
 | BS Mắt | bs.mat@lienchieu.vn | doctor123 |
 | BS TMH | bs.tmh@lienchieu.vn | doctor123 |
 | BS RHM | bs.rhm@lienchieu.vn | doctor123 |
-
+| KTV Xét nghiệm | ktv.xn@lienchieu.vn | xn123 |
+| KTV Chẩn đoán hình ảnh | ktv.cdha@lienchieu.vn | cdha123 |
 > **Đổi mật khẩu ngay** trong production: Admin → Tài khoản → Đổi MK.
 
 ## Kịch bản end-to-end
